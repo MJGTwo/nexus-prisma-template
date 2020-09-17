@@ -1,3 +1,4 @@
 # Prisma Migrate lockfile v1
 
 20200917203842-init
+20200917210031-update-user-with-names-and-type
