@@ -5,8 +5,16 @@
   "repository": "https://github.com/MJGTwo/nexus-prisma-template.git",
   "author": "MJGTwo <gardner.j.michael@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV=development nexus dev",
+    "build": "NODE_ENV=production dotenv -e .env -e prisma/.env nexus build",
+    "start": "NODE_ENV=production dotenv -e .env -e prisma/.env node .nexus/build/api",
+    "prod": "dotenv -e .env -e prisma/.env node dist/api"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv-cli": "^4.0.0",
     "nexus": "^0.26.1",
     "nexus-plugin-jwt-auth": "^1.0.0",
@@ -17,6 +25,7 @@
     "@types/bcryptjs": "^2.4.2",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
+    "babel-polyfill": "^6.26.0",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
