@@ -10,6 +10,7 @@ A complete example of Nexus framework with a test suite and using the following 
 - run `yarn` to download the packages
 - edit `./prisma/.env` to contain database access information (see `./prisma/.env.example` for format)
 - run `npx prisma migrate up --experimental` to run migration
+<!--
 
 ### Node, Outside of Docker
 
@@ -39,4 +40,4 @@ A complete example of Nexus framework with a test suite and using the following 
 - create `.env.docker` based on `.env.example` with production variables
 - create `./prisma/.env.docker` based on `./prisma/.env.exmaple` pointing to the `db` service
 - run `docker-compose -f docker-compose.dev.yml build` to build the containers
-- run `docker-compose -f docker-compose.dev.yml -d up` to run the containers
+- run `docker-compose -f docker-compose.dev.yml -d up` to run the containers -->
