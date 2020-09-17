@@ -1,0 +1,16 @@
+node_modules
+generated
+.env*
+!.env.example
+coverage
+build
+*.log
+letsencrypt
+logs
+userFile
+rabbitmq
+db
+.nexus
+.tmp_build
+.vscode
+coverage
