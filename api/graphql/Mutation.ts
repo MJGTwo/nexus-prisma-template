@@ -54,53 +54,33 @@ export const Mutation = schema.mutationType({
         };
       },
     });
+    t.crud.deleteOnePost();
+    t.crud.createOnePost({
+      alias: 'createDraft',
+      resolve: (_parent, { data }, ctx) => {
+        const userID = getUserID(ctx.token);
+        if (!userID) {
+          throw new Error('Invalid userId');
+        }
+        return ctx.db.post.create({
+          data: {
+            ...data,
+            published: false,
+            author: { connect: { id: Number.parseInt(userID) } },
+          },
+        });
+      },
+    });
+    t.field('publish', {
+      type: 'Post',
+      nullable: true,
+      args: { id: schema.intArg({ required: true }) },
+      resolve: (parent, { id }, ctx) => {
+        return ctx.db.post.update({
+          where: { id },
+          data: { published: true },
+        });
+      },
+    });
   },
-  //     t.field('createDraft', {
-  //       type: 'Post',
-  //       args: {
-  //         title: schema.stringArg({ nullable: false }),
-  //         content: schema.stringArg(),
-  //       },
-  //       resolve: (parent, { title, content }, ctx) => {
-  //         const userId = getUserID(ctx.token);
-  //         if (!userId) {
-  //           throw new Error('Invalid userId');
-  //         }
-
-  //         return ctx.db.post.create({
-  //           data: {
-  //             title,
-  //             content,
-  //             published: false,
-  //             author: { connect: { id: Number.parseInt(userId) } },
-  //           },
-  //         });
-  //       },
-  //     });
-
-  //     t.field('deletePost', {
-  //       type: 'Post',
-  //       nullable: true,
-  //       args: { id: schema.intArg() },
-  //       resolve: (parent, { id }, ctx) => {
-  //         return ctx.db.post.delete({
-  //           where: {
-  //             id,
-  //           },
-  //         });
-  //       },
-  //     });
-
-  //     t.field('publish', {
-  //       type: 'Post',
-  //       nullable: true,
-  //       args: { id: schema.intArg() },
-  //       resolve: (parent, { id }, ctx) => {
-  //         return ctx.db.post.update({
-  //           where: { id },
-  //           data: { published: true },
-  //         });
-  //       },
-  //     });
-  //   },
 });
