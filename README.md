@@ -13,12 +13,17 @@ A complete example of Nexus framework with a test suite and using the following 
 
 ### Node, Outside of Docker
 
-- Clone
 - run `yarn` to download the packages
 - edit `.env` based on `.env.example`
 - run `yarn dev` to start dev environment
 
+## Test setup
+
+_note: please verify your setup is correct by following "Dev Setup" first_
+
+- run `yarn test` which will run the test suite inside of `./tests`
 <!--
+
 ### Node, Inside of Docker
 
 - create `.env.docker` based on `.env.example`
