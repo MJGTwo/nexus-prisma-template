@@ -5,7 +5,7 @@ import * as bodyParser from 'body-parser';
 import { server, log } from 'nexus';
 import cors from 'cors';
 
-// import { rules, options } from './permissions';
+import { rules, options } from './permissions';
 import { prisma as client } from './services/prisma.service';
 
 import { APP_SECRET } from './util';
@@ -18,7 +18,7 @@ import { shield } from 'nexus-plugin-shield';
 use(prisma({ migrations: false, features: { crud: true }, client: { instance: client } }));
 
 use(auth({ appSecret: APP_SECRET }));
-// use(shield({ rules, options }));
+use(shield({ rules, options }));
 
 server.express.use(Express.static('public'));
 server.express.use(cors());
