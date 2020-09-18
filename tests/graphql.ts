@@ -38,3 +38,21 @@ export const signup = ({
     }}
   
 `;
+
+export const me = /* GraphQL */ `
+  query {
+    me {
+      first_name
+      last_name
+    }
+  }
+`;
+
+export const createDraft = ({ title, content }: { title: string; content: string }) => /* GraphQL */ `
+  mutation {
+    createDraft(data: { title: "${title}", content: "${content}" }) {
+      title
+      published
+    }
+  }
+`;
