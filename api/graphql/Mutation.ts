@@ -1,6 +1,6 @@
 import { compare, hash } from 'bcryptjs';
 import { schema } from 'nexus';
-import { createToken, getUserID } from '../util';
+import { createToken, getUserID, passwordRequirement } from '../util';
 
 export const Mutation = schema.mutationType({
   definition(t) {
@@ -13,6 +13,9 @@ export const Mutation = schema.mutationType({
         password: schema.stringArg({ nullable: false }),
       },
       resolve: async (_parent, { first_name, last_name, email, password }, ctx) => {
+        if (!passwordRequirement.test(password)) {
+          throw new Error('New password must be: one upper, one lower, one number, at least 8 characters long');
+        }
         const hashedPassword = await hash(password, 10);
         const user = await ctx.db.user.create({
           data: {
